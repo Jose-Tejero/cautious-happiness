@@ -10,7 +10,6 @@ app.use(express.json());
 app.use(morgan('dev'));
 app.use(cors());
 
-initModels();
 
 db.authenticate()
   .then(() => console.log('Autenticación exitosa'))
@@ -19,6 +18,8 @@ db.authenticate()
 db.sync({ alter: true })
   .then(() => console.log('Base de datos sincronizada'))
   .catch((error) => console.log(error));
+
+initModels();
 
 app.get('/', () => {
   console.log('Todo bien');

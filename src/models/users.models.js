@@ -43,7 +43,7 @@ const Users = db.define('users', {
     beforeCreate: (user, options) => {
       const { password } = user;
       const hash = bcrypt.hashSync(password, 8);
-      
+      user.password = hash;
     }
   },
 });
