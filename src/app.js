@@ -5,7 +5,7 @@ const app = express();
 const db = require('./utils/database');
 const handleError = require('./middlewares/error.middleware');
 const initModels = require('./models/initModels');
-const { userRoutes } = require('./routes');
+const { userRoutes, authRoutes } = require('./routes');
 
 app.use(express.json());
 app.use(morgan('dev'));
@@ -27,6 +27,7 @@ app.get('/', () => {
 });
 
 app.use('/api/v1', userRoutes)
+app.use('/api/v1', authRoutes)
 
 app.use(handleError);
 

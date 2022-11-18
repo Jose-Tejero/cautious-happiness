@@ -1,8 +1,17 @@
+const { AuthServices } = require('../services');
+
 const userLogin = async (req, res, next) => {
   try {
     const credentials = req.body;
-    const result = await AuthServices.login(credentials);
-    res.json(result);
+    const result = await AuthServices.authenticate(credentials);
+    if (result) {
+      const { firstname, lastname, email, id, phone } = result.result;
+      const user = { firstname, lastname, email, id, phone };
+      const token = AuthServices.getToken(user);
+      res.json({ token, user });
+    } else {
+      res.status(400).json({ message: 'Información inválida' });
+    };
   } catch (error) {
     next({
       status: 400,
@@ -12,4 +21,4 @@ const userLogin = async (req, res, next) => {
   }
 };
 
-module.exports = {userLogin};
+module.exports = { userLogin };
