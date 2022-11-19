@@ -7,8 +7,12 @@ const {
 
 const initModels = () => {
 
-  Users.belongsToMany(Conversations, { through: 'participants' });
-  Conversations.belongsToMany(Users, { through: 'participants' });
+  // Users.belongsToMany(Conversations, { through: Participants });
+  // Conversations.belongsToMany(Users, { through: Participants });
+  Users.hasMany(Participants);
+  Participants.belongsTo(Users);
+  Conversations.hasMany(Participants);
+  Participants.belongsTo(Conversations);
 
   Messages.belongsTo(Users, { as: 'sender', foreignKey: 'sender_id' });
   Users.hasMany(Messages, { as: 'messages', foreignKey: 'sender_id' });

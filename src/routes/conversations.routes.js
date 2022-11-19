@@ -4,6 +4,6 @@ const authenticate = require('../middlewares/auth.middlewares');
 
 const router = Router();
 
-router.get('/conversations/:id', authenticate, getUserConversations);
+router.get('/conversations/:id/:conversation_id', authenticate, getUserConversations);
 
 module.exports = router;
