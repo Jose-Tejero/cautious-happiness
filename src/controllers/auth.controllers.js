@@ -8,7 +8,8 @@ const userLogin = async (req, res, next) => {
       const { firstname, lastname, email, id, phone } = result.result;
       const user = { firstname, lastname, email, id, phone };
       const token = AuthServices.getToken(user);
-      res.json({ token, user });
+      user.token = token;
+      res.json({ ...user });
     } else {
       res.status(400).json({ message: 'Información inválida' });
     };
