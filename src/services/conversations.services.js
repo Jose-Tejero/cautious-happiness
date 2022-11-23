@@ -3,20 +3,6 @@ const { Conversations, Users, Messages, Participants } = require('../models');
 class ConversationsServices {
   static async getByUser(id, conversation_id) {
     try {
-      // const conversations = await Users.findAll({
-      // where: { id: id },
-      // attributes: ['id'],
-      // include: {
-      //   model: Conversations,
-      //   where: { id: conversation_id },
-      //   attributes: ['id', 'title', 'imageUrl'],
-      //   include: {
-      //     model: Messages,
-      //     as: 'messages',
-      //     attributes: ['id', 'senderId', 'message'],
-      //   },
-      // },
-      // });
       const conversations = await Users.findAll({
         where: { id: id },
         attributes: ['id', 'firstname', 'lastname', 'profileImage', 'phone'],
@@ -43,6 +29,27 @@ class ConversationsServices {
         },
       });
       return conversations;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  static async createMessage(data) {
+    try {
+      const result = await Messages.create(data)
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  static async create(data) {
+    try {
+      const { createdBy, title, participants } = data;
+      const conversation = await Conversations.create({ title, createdBy });
+      const conversationId = conversation.id;
+      const conversationParticipants = participants.map((userId) => { return { conversationId, userId } });
+      conversationParticipants.forEach(async participant => await Participants.create(participant));
     } catch (error) {
       throw error;
     }
