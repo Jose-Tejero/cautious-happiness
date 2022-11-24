@@ -39,7 +39,11 @@ const bcrypt = require('bcrypt');
  *         password:
  *           type: string
  *           example: 1234
- *
+ *   securitySchemes:
+ *     bearerAuth:
+ *       type: http
+ *       scheme: bearer
+ *       bearerFormat: JWT
  */
 
 

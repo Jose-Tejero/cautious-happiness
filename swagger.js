@@ -12,6 +12,7 @@ const options = {
   },
   apis: [
     './src/routes/users.routes.js',
+    './src/routes/conversations.routes.js',
     './src/models/users.models.js',
   ],
 };
