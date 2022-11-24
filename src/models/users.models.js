@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
  * @openapi
  * components:
  *   schemas:
- *     Users:
+ *     users:
  *       type: object
  *       properties:
  *         id:
@@ -21,6 +21,24 @@ const bcrypt = require('bcrypt');
  *         email:
  *           type: string
  *           example: ian@gmail.com
+ *     register:
+ *       type: object
+ *       properties:
+ *         firstname:
+ *           type: string
+ *           example: Ian
+ *         lastname:
+ *           type: string
+ *           example: Rosas
+ *         email:
+ *           type: string
+ *           example: ian@email.com
+ *         phone:
+ *           type: string
+ *           example: 1234567890
+ *         password:
+ *           type: string
+ *           example: 1234
  *
  */
 
